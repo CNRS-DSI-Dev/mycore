@@ -1,0 +1,22 @@
+#header .logo {
+	background-image: url(../img/logo.png);
+	background-repeat: no-repeat;
+	width: 171px;
+	height: 120px;
+	margin: 0 auto;	
+}
+
+#header .logo-icon {
+	display: inline-block;
+	background-image: url(../img/logo-icon.png);
+	background-repeat: no-repeat;
+	width: 62px;
+	height: 34px;
+}
+
+#header .logo-wide {
+	background-image: url(../img/logo-icon.png);
+	background-repeat: no-repeat;
+	width: 62px;
+	height: 34px;
+}
