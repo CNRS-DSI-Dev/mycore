@@ -1,4 +1,4 @@
-# mycore
+# My Core theme 
 
 ownCloud theme for My CoRe project at CNRS.
 
