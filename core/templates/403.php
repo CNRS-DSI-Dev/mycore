@@ -10,7 +10,7 @@ if(!isset($_)) {//also provide standalone error page
 <ul>
 	<li class='error'>
 		<?php p($l->t( 'Access forbidden' )); ?><br/>
-		<p class='hint'><?php if(isset($_['file'])) p($_['file'])?></p>
+		<p class='hint'><?php if(isset($_['file'])) p($_['file'])?></p><?php p($l->t( 'Error' ));?> 403<br/>
 	</li>
 </ul>
 <div>
