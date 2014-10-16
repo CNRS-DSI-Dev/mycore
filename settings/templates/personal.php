@@ -49,8 +49,12 @@ if($_['passwordChangeSupported']) {
 	<input type="checkbox" id="personal-show" name="show" /><label for="personal-show"></label>
 	<input id="passwordbutton" type="submit" value="<?php echo $l->t('Change password');?>" />
 	<br/>
+
+	<p><?php p($l->t("If you don't know your password, please see below, section \"Useful Informations For Connection With Login/Password\".")); ?></p>
+
 	<div class="strengthify-wrapper"></div>
 </form>
+
 <?php
 }
 ?>
