@@ -62,4 +62,11 @@
 		<option value="1"<?php if ($_['setting_batchtime'] === \OCA\Activity\UserSettings::EMAIL_SEND_DAILY): ?> selected="selected"<?php endif; ?>><?php p($l->t('Daily')); ?></option>
 		<option value="2"<?php if ($_['setting_batchtime'] === \OCA\Activity\UserSettings::EMAIL_SEND_WEEKLY): ?> selected="selected"<?php endif; ?>><?php p($l->t('Weekly')); ?></option>
 	</select>
+
+	<br />	
+	<?php if (OC_Config::getValue('activity_expire_days','') != ''): ?>
+		<br />
+		<strong><?php p($l->t('Number of days for activity history retention:').OC_Config::getValue('activity_expire_days','')); ?></strong>
+	<?php endif; ?>
+
 </form>
