@@ -1,6 +1,6 @@
 <?php
 if(!isset($_)) {//also provide standalone error page
-	require_once '../../lib/base.php';
+	require_once '../../../../lib/base.php';
 	
 	$tmpl = new OC_Template( '', '404', 'guest' );
 	$tmpl->printPage();
@@ -12,7 +12,7 @@ if(!isset($_)) {//also provide standalone error page
 <?php else: ?>
 	<ul>
 		<li class="error">
-			<?php p($l->t( 'Cloud not found' )); ?><br/>
+			<?php p($l->t( 'Cloud not found' )); ?><br/><?php p($l->t( 'Error' ));?> 404<br/>
 			<p class='hint'><?php if(isset($_['file'])) p($_['file'])?></p>
 		</li>
 	</ul>
