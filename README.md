@@ -6,6 +6,7 @@ ownCloud theme for My CoRe project at CNRS.
 
 The theme must be put in the owncloud theme directory, for instance with the name mycore, and then you have to put in the config.php file the parameter 'theme' ==> 'mycore'.
 
+Do not forget to change owner after git clone command for a propoer installation.
 
 ## Contributing
 
