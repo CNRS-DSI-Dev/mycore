@@ -1,8 +1,19 @@
 <?php /** @var $l OC_L10N */ ?>
 
 <!--[if IE 8]><style>input[type="checkbox"]{padding:0;}</style><![endif]-->
+<!-- EMBEDDED-WAYF-START -->
+                <script type="text/javascript" src="wayf/index.php/embedded-wayf.js">
+                </script>
+                <noscript>
+                        <p>
+                                <strong>Login:</strong> Javascript is not enabled for your web browser. Please use the <a href="/Shibboleth.sso/Login?target=">non-Javascript Login</a>.
+                        </p>
+                </noscript>
+<!-- EMBEDDED-WAYF-END -->
+
 <form method="post" name="login">
 	<fieldset>
+	<legend><?php p($l->t('Alternative Login')) ?></legend>
 	<?php if (!empty($_['redirect_url'])) {
 		print_unescaped('<input type="hidden" name="redirect_url" value="' . OC_Util::sanitizeHTML($_['redirect_url']) . '" />');
 	} ?>
@@ -51,18 +62,6 @@
 		<input type="submit" id="submit" class="login primary" value="<?php p($l->t('Log in')); ?>" disabled="disabled"/>
 	</fieldset>
 </form>
-<?php if (!empty($_['alt_login'])) { ?>
-<form id="alternative-logins">
-	<fieldset>
-		<legend><?php p($l->t('Alternative Login')) ?></legend>
-		<ul>
-			<?php foreach($_['alt_login'] as $login): ?>
-				<li><a class="button" href="<?php print_unescaped($login['href']); ?>" ><?php p($login['name']); ?></a></li>
-			<?php endforeach; ?>
-		</ul>
-	</fieldset>
-</form>
-<?php } ?>
 
 <?php
 OCP\Util::addscript('core', 'visitortimezone');

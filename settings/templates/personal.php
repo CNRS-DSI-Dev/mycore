@@ -203,6 +203,17 @@ if($_['passwordChangeSupported']) {
 <?php if (OC_Util::getEditionString() === ''): ?>
 	<?php print_unescaped($l->t('Developed by the <a href="http://ownCloud.org/contact" target="_blank">ownCloud community</a>, the <a href="https://github.com/owncloud" target="_blank">source code</a> is licensed under the <a href="http://www.gnu.org/licenses/agpl-3.0.html" target="_blank"><abbr title="Affero General Public License">AGPL</abbr></a>.')); ?>
 <?php endif; ?>
+<?php if (OC_Config::getValue('custom_ods_version','') != ''): ?>
+	<br />
+	<strong><?php p($l->t('Version of %s:', $theme->getTitle()).' '.OC_Config::getValue('custom_ods_version','')); ?></strong>
+		<?php if (OC_Config::getValue('custom_ods_changelogurl','') != ''): ?>
+			 - <strong><a href="<?php print_unescaped(OC_Config::getValue('custom_ods_changelogurl','')); ?>"><?php p($l->t('Change log')); ?></a></strong>
+		<?php endif; ?>
+<?php endif; ?>
+<?php if (OC_Config::getValue('custom_termsofserviceurl','') != ''): ?>
+        <br />
+	<strong><a href="<?php print_unescaped(OC_Config::getValue('custom_termsofserviceurl','')); ?>"><?php p($l->t('GTU')); ?></a></strong>
+<?php endif; ?>
 </div>
 
 <div class="section credits-footer">
