@@ -20,11 +20,12 @@ class OC_Theme {
 
         // basics
         $this->myEntity = "CNRS"; /* e.g. company name, used for footers and copyright notices */
-        $this->myName = "ownCloud"; /* short name, used when referring to the software */
+        $this->myName = "Service My CoRe"; /* short name, used when referring to the service */
         $this->myTitle = "My CoRe"; /* can be a longer name, for titles */
-        $this->myBaseUrl = "https://mycore.core-cloud.net";
+        $this->myBaseUrl = "http://www.offres-de-services-unites.net";
         $this->mySlogan = "My CoRe, service sécurisé de partage et de synchronisation de fichiers";
         $this->myLogoClaim = "";
+        $this->myDocBaseUrl = "https://aide.core-cloud.net/mycore/";
 
         // for perfectionists (others: just keep it like this)
         $this->defaultSyncClientUrl = " http://owncloud.org/sync-clients/";

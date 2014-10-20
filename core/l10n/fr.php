@@ -7,5 +7,8 @@ $TRANSLATIONS = array(
 "Bad Request" => "La syntaxe de la requête est erronée",
 "Error"  => "Erreur",
 "Alternative Login" => "Login alternatif",
+"My Core - %s shared »%s« with you" => "My Core - %s a partagé »%s« avec vous",
+"%s shared »%s« with you" => "My Core - %s a partagé »%s« avec vous",
+"%s password reset" => "My Core - Réinitialisation de votre mot de passe %s",
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n > 1);";
