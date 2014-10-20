@@ -23,7 +23,7 @@ class OC_Theme {
         $this->myName = "Service My CoRe"; /* short name, used when referring to the service */
         $this->myTitle = "My CoRe"; /* can be a longer name, for titles */
         $this->myBaseUrl = "http://www.offres-de-services-unites.net";
-        $this->mySlogan = "My CoRe, service sécurisé de partage et de synchronisation de fichiers";
+        $this->mySlogan = "My CoRe, partage et nomadisme";
         $this->myLogoClaim = "";
         $this->myDocBaseUrl = "https://aide.core-cloud.net/mycore/";
 
