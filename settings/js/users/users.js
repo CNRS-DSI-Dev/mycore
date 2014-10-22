@@ -306,8 +306,8 @@ var UserList = {
 			// Call function for handling delete/undo
 			var uid = UserList.getUID(this);
 			OC.dialogs.confirm(
-				'Confirm suppression of "' + uid + '" user ?',
-				'User suppression',
+				t('settings', 'Confirm suppression of {userID} user ?', {userID: uid}),
+				t('settings', 'User suppression'),
 				function(okToSuppress) {
 					if (okToSuppress) {
 						UserDeleteHandler.mark(uid);

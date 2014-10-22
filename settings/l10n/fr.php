@@ -4,5 +4,7 @@ $TRANSLATIONS = array(
 "Version of %s:" => "Version de %s :",
 "Change log" => "Change log",
 "GTU" => "CGU",
+"Confirm suppression of {userID} user ?" => "Confirmez vous la suppression de l'utilisateur {userID} ?",
+"User suppression" => "Suppression d'un utilisateur",
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n > 1);";
