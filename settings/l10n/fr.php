@@ -1,6 +1,6 @@
 <?php
 $TRANSLATIONS = array(
-"If you don't know your password, please see below, section \"Useful Informations For Connection With Login/Password\"." => "Si vous ne connaissez pas votre mot de passe, voyez plus bas la section \"Informations utiles pour la connexion via utilisateur/mot de passe\".",
+"If you don't know your password, please see below, section <a href=\"#user_servervars2\">Useful Informations For Connection With Login/Password</a>." => "Si vous ne connaissez pas votre mot de passe, voyez plus bas la section <a href=\"#user_servervars2\">Informations utiles pour la connexion via utilisateur/mot de passe</a>.",
 "Version of %s:" => "Version de %s :",
 "Change log" => "Change log",
 "GTU" => "CGU",

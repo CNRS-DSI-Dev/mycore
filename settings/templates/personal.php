@@ -50,7 +50,7 @@ if($_['passwordChangeSupported']) {
 	<input id="passwordbutton" type="submit" value="<?php echo $l->t('Change password');?>" />
 	<br/>
 
-	<p><?php p($l->t("If you don't know your password, please see below, section \"Useful Informations For Connection With Login/Password\".")); ?></p>
+	<p><?php print_unescaped($l->t("If you don't know your password, please see below, section <a href=\"#user_servervars2\">Useful Informations For Connection With Login/Password</a>.")); ?></p>
 
 	<div class="strengthify-wrapper"></div>
 </form>
