@@ -26,7 +26,8 @@
 				<span id="save" data-protected="<?php p($_['protected'])?>" data-owner="<?php p($_['displayName'])?>" data-name="<?php p($_['filename'])?>">
 					<button id="save-button"><?php p($l->t('Add to your space')) ?></button>
 					<form class="save-form hidden" action="#">
-						<input type="text" id="remote_address" placeholder="example.com/owncloud"/>
+						<!-- Mantis 34689 <input type="text" id="remote_address" placeholder="example.com/owncloud"/> -->
+						<input type="text" id="remote_address" placeholder="https://mycore.core-cloud.net"/>
 						<button id="save-button-confirm" class="icon-confirm svg"></button>
 					</form>
 				</span>

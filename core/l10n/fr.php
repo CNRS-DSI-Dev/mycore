@@ -10,5 +10,6 @@ $TRANSLATIONS = array(
 "My Core - %s shared »%s« with you" => "My Core - %s a partagé »%s« avec vous",
 "%s shared »%s« with you" => "My Core - %s a partagé »%s« avec vous",
 "%s password reset" => "My Core - Réinitialisation de votre mot de passe %s",
+"Add remote share" => "Ajouter le fichier",
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n > 1);";
