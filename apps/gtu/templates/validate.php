@@ -39,7 +39,7 @@ $msg = isset($_['msg']) ? $_['msg']: ''
 			<form ng-show="show" name="login">
 				<fieldset>
 					<p>Veuillez prendre connaissance des nouvelles Conditions Générales d'Utilisation en version <b>{{gtu.version}}</b></p>
-					<p>Contenu : {{gtu.text}}</p>
+					<!-- Mantis 34762 <p>Contenu : {{gtu.text}}</p> -->
 					<p>Téléchargez le document complet des CGU en suivant le lien suivant : <a href="{{gtu.url}}" target="_gtu">{{gtu.url}}</a></p>
 					<button ng-show="notValidated" ng-click="validate()">
 						VALIDER LES CGU
