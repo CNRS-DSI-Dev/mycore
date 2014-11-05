@@ -15,7 +15,7 @@ if ($_['timeframe'] == \OCA\Activity\UserSettings::EMAIL_SEND_HOURLY) {
 } else if ($_['timeframe'] == \OCA\Activity\UserSettings::EMAIL_SEND_DAILY) {
 	print_unescaped($l->t("You are receiving this email because in the last day the following things happened at %s", array($_['owncloud_installation'])));
 } else {
-	print_unescaped($l->t("ou are receiving this email because in the last week the following things happened at %s", array($_['owncloud_installation'])));
+	print_unescaped($l->t("You are receiving this email because in the last week the following things happened at %s", array($_['owncloud_installation'])));
 }
 p("\n");
 p("\n");
