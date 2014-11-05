@@ -11,5 +11,10 @@ $TRANSLATIONS = array(
 "%s shared »%s« with you" => "My Core - %s a partagé »%s« avec vous",
 "%s password reset" => "My Core - Réinitialisation de votre mot de passe %s",
 "Add remote share" => "Ajouter le fichier",
+"The following password restrictions are currently in place:" => "Les règles suivantes sont à respecter pour votre mot de passe :",
+"Password must contain upper and lower case characters" => "Le mot de passe doit contenir des majuscules et des minuscules",
+"Length of password at least: %s" => "Longueur minimale du mot de passe : %s",
+"Password must contain numbers" => "Le mot de passe doit contenir des chiffres",
+"Password must contain following special characters: %s" => "Le mot de passe doit contenir au moins un des caractères particuliers suivants : %s",
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n > 1);";
