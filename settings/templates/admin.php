@@ -303,14 +303,7 @@ if ($_['suggestedOverwriteWebroot']) {
 			<label for="shareapiExcludeGroups"><?php p($l->t('Exclude groups from sharing'));?></label><br/>
 		</p>
 			<p id="selectExcludedGroups" class="indent <?php if (!$_['shareExcludeGroups'] || $_['shareAPIEnabled'] === 'no') p('hidden'); ?>">
-				<select
-					class="groupsselect"
-					id="excludedGroups" data-placeholder="groups"
-					title="<?php p($l->t('Groups'))?>" multiple="multiple">
-					<?php foreach($_["groups"] as $group): ?>
-						<option value="<?php p($group['gid'])?>" <?php if($group['excluded']) { p('selected="selected"'); }?>><?php p($group['gid']);?></option>
-					<?php endforeach;?>
-				</select>
+				<input name="shareapi_exclude_groups_list" type="hidden" id="excludedGroups" value="<?php p($_['shareExcludedGroupsList']) ?>" style="width: 400px"/>
 				<br />
 				<em><?php p($l->t('These groups will still be able to receive shares, but not to initiate them.')); ?></em>
 			</p>
@@ -373,7 +366,7 @@ if ($_['suggestedOverwriteWebroot']) {
 				if ($secure == $_['mail_smtpsecure']):
 					$selected = 'selected="selected"';
 				endif; ?>
-				<option value='<?php p($secure)?>' <?php p($selected) ?>><?php p($name) ?></option>
+				<option value="<?php p($secure)?>" <?php p($selected) ?>><?php p($name) ?></option>
 			<?php endforeach;?>
 		</select>
 	</p>
@@ -395,7 +388,7 @@ if ($_['suggestedOverwriteWebroot']) {
 				if ($authtype == $_['mail_smtpauthtype']):
 					$selected = 'selected="selected"';
 				endif; ?>
-				<option value='<?php p($authtype)?>' <?php p($selected) ?>><?php p($name) ?></option>
+				<option value="<?php p($authtype)?>" <?php p($selected) ?>><?php p($name) ?></option>
 			<?php endforeach;?>
 		</select>
 
@@ -435,7 +428,7 @@ if ($_['suggestedOverwriteWebroot']) {
 	if ($i == $_['loglevel']):
 		$selected = 'selected="selected"';
 	endif; ?>
-		<option value='<?php p($i)?>' <?php p($selected) ?>><?php p($levelLabels[$i])?></option>
+		<option value="<?php p($i)?>" <?php p($selected) ?>><?php p($levelLabels[$i])?></option>
 <?php endfor;?>
 </select>
 	<table id="log" class="grid">
@@ -485,7 +478,6 @@ if ($_['suggestedOverwriteWebroot']) {
         <br />
         <strong><a href="<?php print_unescaped(OC_Config::getValue('custom_termsofserviceurl','')); ?>"><?php p($l->t('GTU')); ?></a> version <?php echo OCP\Config::getAppValue('gtu', 'version','0') ?></strong>
 <?php endif; ?>
-</div>
 </div>
 
 <div class="section credits-footer">
