@@ -112,19 +112,25 @@ if($_['passwordChangeSupported']) {
 </form>
 <?php endif; ?>
 
+<?php
+// create a sub-array for only the two languages we're using
+$commonlanguages = array();
+foreach($_['commonlanguages'] as $language) {
+	if ($language['code'] == 'fr' or $language['code'] == 'en') {
+		array_push($commonlanguages, array(
+			'code' => $language['code'],
+			'name' => $language['name'],
+		));
+	}
+}
+?>
 <form class="section">
 	<h2><?php p($l->t('Language'));?></h2>
 	<select id="languageinput" name="lang" data-placeholder="<?php p($l->t('Language'));?>">
 		<option value="<?php p($_['activelanguage']['code']);?>">
 			<?php p($_['activelanguage']['name']);?>
 		</option>
-		<?php foreach($_['commonlanguages'] as $language):?>
-			<option value="<?php p($language['code']);?>">
-				<?php p($language['name']);?>
-			</option>
-		<?php endforeach;?>
-		<optgroup label="––––––––––"></optgroup>
-		<?php foreach($_['languages'] as $language):?>
+		<?php foreach($commonlanguages as $language):?>
 			<option value="<?php p($language['code']);?>">
 				<?php p($language['name']);?>
 			</option>
