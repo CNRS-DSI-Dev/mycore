@@ -6,5 +6,7 @@ $TRANSLATIONS = array(
 "GTU" => "CGU",
 "Confirm suppression of {userID} user ?" => "Confirmez vous la suppression de l'utilisateur {userID} ?",
 "User suppression" => "Suppression d'un utilisateur",
+"Help translate My CoRe" => "Aidez à traduire My CoRe",
+"Help translate ownCloud" => "Aidez à traduire ownCloud",
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n > 1);";

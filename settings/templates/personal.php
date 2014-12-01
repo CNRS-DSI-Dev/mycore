@@ -137,9 +137,13 @@ foreach($_['commonlanguages'] as $language) {
 		<?php endforeach;?>
 	</select>
 	<?php if (OC_Util::getEditionString() === ''): ?>
+	<a href="http://www.offres-de-services-unites.net/contacts.html"
+		target="_blank">
+		<em><?php p($l->t('Help translate My CoRe'));?></em>
+	</a> /
 	<a href="https://www.transifex.com/projects/p/owncloud/team/<?php p($_['activelanguage']['code']);?>/"
 		target="_blank">
-		<em><?php p($l->t('Help translate'));?></em>
+		<em><?php p($l->t('Help translate ownCloud'));?></em>
 	</a>
 	<?php endif; ?>
 </form>
