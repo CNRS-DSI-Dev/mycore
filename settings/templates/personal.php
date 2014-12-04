@@ -74,21 +74,6 @@ if($_['displayNameChangeSupported']) {
 }
 ?>
 
-<?php
-if($_['passwordChangeSupported']) {
-?>
-<form id="lostpassword" class="section">
-	<h2><?php p($l->t('Email'));?></h2>
-	<input type="text" name="email" id="email" value="<?php p($_['email']); ?>"
-		placeholder="<?php p($l->t('Your email address'));?>"
-		autocomplete="on" autocapitalize="off" autocorrect="off" />
-	<span class="msg"></span><br />
-	<em><?php p($l->t('Fill in an email address to enable password recovery and receive notifications'));?></em>
-</form>
-<?php
-}
-?>
-
 <?php if ($_['enableAvatars']): ?>
 <form id="avatar" class="section" method="post" action="<?php p(\OC_Helper::linkToRoute('core_avatar_post')); ?>">
 	<h2><?php p($l->t('Profile picture')); ?></h2>
