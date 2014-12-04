@@ -18,6 +18,6 @@ echo str_replace('{link}', $_['link'], $l->t('Use the following link to reset yo
 } ?>
 
 <?php if(OC_Password_Policy::getSpecialChars()){ 
-	p('- '.$l->t('Password must contain following special characters: %s', OC_Password_Policy::getSpecialCharsList()));
+	print_unescaped('- '.$l->t('Password must contain following special characters: %s', OC_Password_Policy::getSpecialCharsList()));
 }}  ?>
 
