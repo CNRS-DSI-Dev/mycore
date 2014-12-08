@@ -13,7 +13,8 @@
 
 <form method="post" name="login">
 	<fieldset>
-	<legend><?php p($l->t('Alternative Login')) ?></legend>
+	<legend><span id="altloginswitch"><?php p($l->t('Alternative Login')) ?></span></legend>
+	<div id="altlogin" style="display:none;">
 	<?php if (!empty($_['redirect_url'])) {
 		print_unescaped('<input type="hidden" name="redirect_url" value="' . OC_Util::sanitizeHTML($_['redirect_url']) . '" />');
 	} ?>
@@ -60,6 +61,7 @@
 		<input type="hidden" name="timezone-offset" id="timezone-offset"/>
 		<input type="hidden" name="requesttoken" value="<?php p($_['requesttoken']) ?>" />
 		<input type="submit" id="submit" class="login primary" value="<?php p($l->t('Log in')); ?>" disabled="disabled"/>
+	</div>
 	</fieldset>
 </form>
 

@@ -20,3 +20,7 @@
 	width: 62px;
 	height: 34px;
 }
+
+#body-login input {
+	font-size: 100%;
+}
