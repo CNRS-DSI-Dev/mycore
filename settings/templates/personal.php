@@ -8,9 +8,15 @@
 	<h2><?php p($l->t('Get the apps to sync your files'));?></h2>
 	<a href="<?php p($_['clients']['desktop']); ?>" target="_blank">
 		<img src="<?php print_unescaped(OCP\Util::imagePath('core', 'desktopapp.png')); ?>" />
+
 	</a>
 	<a href="<?php p($_['clients']['android']); ?>" target="_blank">
-		<img src="<?php print_unescaped(OCP\Util::imagePath('core', 'googleplay.png')); ?>" />
+		<img src="<?php print_unescaped(OCP\Util::imagePath('core', 'googleplay.png')); ?>" /><br/>
+		<span><?php p($l->t('Paid client app'))?></span>
+	</a>
+	<a href="https://play.google.com/store/apps/details?id=com.owncloud.androidApp" target="_blank">
+		<img src="<?php print_unescaped(OCP\Util::imagePath('core', 'googleplay.png')); ?>" /><br/>
+		<span><?php p($l->t('Free client app'))?></span>
 	</a>
 	<a href="<?php p($_['clients']['ios']); ?>" target="_blank">
 		<img src="<?php print_unescaped(OCP\Util::imagePath('core', 'appstore.png')); ?>" />
