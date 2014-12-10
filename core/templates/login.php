@@ -13,8 +13,8 @@
 
 <form method="post" name="login">
 	<fieldset>
-	<legend><span id="altloginswitch"><?php p($l->t('Alternative Login')) ?></span></legend>
-	<div id="altlogin" style="display:none;">
+	<legend><span id="altloginswitch" style="font-size: 140%;"><?php p($l->t('Local account login')) ?></span></legend>
+	<div id="altlogin" style="display:block;">
 	<?php if (!empty($_['redirect_url'])) {
 		print_unescaped('<input type="hidden" name="redirect_url" value="' . OC_Util::sanitizeHTML($_['redirect_url']) . '" />');
 	} ?>
