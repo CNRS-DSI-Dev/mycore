@@ -10,6 +10,8 @@ $TRANSLATIONS = array(
 "Help translate ownCloud" => "Aidez à traduire ownCloud",
 "Connectivity Checks" => "Vérifications des connections",
 "No problems found" => "Aucun problème trouvé",
-"Please double check the <a href=\'%s\'>installation guides</a>." => "Merci de bien vérifier les <a href=\'%s\'>guides d'installation</a>."
+"Please double check the <a href=\'%s\'>installation guides</a>." => "Merci de bien vérifier les <a href=\'%s\'>guides d'installation</a>.",
+"Paid client app" => "Client payant",
+"Free client app" => "Client gratuit",
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n > 1);";
