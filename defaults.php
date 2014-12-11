@@ -66,7 +66,7 @@ class OC_Theme {
     }
 
     public function getShortFooter() {
-        $footer = "<a href=\"". $this->getBaseUrl() . "\" target=\"_blank\">" . $this->getEntity() . "</a>" . ' – ' . $this->getSlogan(). ' – <a href="https://aide.core-cloud.net/mycore/Documents/myCoRe_CGU.pdf" target="_blank">CGU</a>';
+        $footer = "<a href=\"". $this->getBaseUrl() . "\" target=\"_blank\">" . $this->getEntity() . "</a>" . ' – ' . $this->getSlogan(). ' – <a href="https://mycore.core-cloud.net/public.php?service=files&t=e954e28f449eb8bbb63dd19804f3f3eb" target="_blank">CGU</a>';
         return $footer;
     }
 
