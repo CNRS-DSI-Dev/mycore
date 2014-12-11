@@ -31,17 +31,17 @@ $previewSupported = OC\Preview::isMimeSupported($_['mimetype']) ? 'true' : 'fals
 		<div class="header-right">
 			<span id="details">
 				<?php
-				if ($_['server2serversharing']) {
+				//if ($_['server2serversharing']) {
 					?>
 					<span id="save" data-protected="<?php p($_['protected']) ?>"
 						  data-owner="<?php p($_['displayName']) ?>" data-name="<?php p($_['filename']) ?>">
 					<button id="save-button"><?php p($l->t('Add to your ownCloud')) ?></button>
 					<form class="save-form hidden" action="#">
-						<input type="text" id="remote_address" placeholder="example.com/owncloud"/>
+						<input type="text" id="remote_address" placeholder="<?php p($l->t("Your owncloud URL")); ?>"/>
 						<button id="save-button-confirm" class="icon-confirm svg"></button>
 					</form>
 				</span>
-				<?php } ?>
+				<?php //} ?>
 				<a href="<?php p($_['downloadURL']); ?>" id="download" class="button">
 					<img class="svg" alt="" src="<?php print_unescaped(OCP\image_path("core", "actions/download.svg")); ?>"/>
 					<span id="download-text"><?php p($l->t('Download'))?></span>
