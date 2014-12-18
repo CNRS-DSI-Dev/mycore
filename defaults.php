@@ -1,9 +1,9 @@
 <?php
 
-/* Theming the name and slogan of your ownCloud installation is as easy 
-as copying this content to a brandnew 
-/themes/[replace-by-your-theme-name]/defaults.php 
-and replacing the strings in __construct() with your best name ideas */ 
+/* Theming the name and slogan of your ownCloud installation is as easy
+as copying this content to a brandnew
+/themes/[replace-by-your-theme-name]/defaults.php
+and replacing the strings in __construct() with your best name ideas */
 
 class OC_Theme {
 
@@ -43,7 +43,7 @@ class OC_Theme {
 
     public function getDocBaseUrl() {
         return $this->myDocBaseUrl;
-    }   
+    }
 
     public function getTitle() {
         return $this->myTitle;
@@ -66,7 +66,8 @@ class OC_Theme {
     }
 
     public function getShortFooter() {
-        $footer = "<a href=\"". $this->getBaseUrl() . "\" target=\"_blank\">" . $this->getEntity() . "</a>" . ' – ' . $this->getSlogan(). ' – <a href="https://mycore.core-cloud.net/public.php?service=files&t=e954e28f449eb8bbb63dd19804f3f3eb" target="_blank">CGU</a>';
+        //$footer = "<a href=\"". $this->getBaseUrl() . "\" target=\"_blank\">" . $this->getEntity() . "</a>" . ' – ' . $this->getSlogan(). ' – <a href="https://mycore.core-cloud.net/public.php?service=files&t=e954e28f449eb8bbb63dd19804f3f3eb" target="_blank">CGU</a>';
+        $footer = "<a href=\"". $this->getBaseUrl() . "\" target=\"_blank\">" . $this->getEntity() . "</a>" . ' – ' . $this->getSlogan(). ' – <a href="' . \OCP\Config::getAppvalue('gtu', 'url', '') . '" target="_blank">CGU</a>';
         return $footer;
     }
 

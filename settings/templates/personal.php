@@ -214,7 +214,7 @@ foreach($_['commonlanguages'] as $language) {
 <?php endif; ?>
 <?php if (OC_Config::getValue('custom_termsofserviceurl','') != ''): ?>
         <br />
-	<strong><a href="<?php print_unescaped(OC_Config::getValue('custom_termsofserviceurl','')); ?>"><?php p($l->t('GTU')); ?></a> version <?php echo OCP\Config::getAppValue('gtu', 'version','0') ?></strong>
+	<strong><a href="<?php print_unescaped(OCP\Config::getAppValue('gtu', 'url','')); ?>"><?php p($l->t('GTU')); ?></a> version <?php echo OCP\Config::getAppValue('gtu', 'version','0') ?></strong>
 <?php endif; ?>
 </div>
 
