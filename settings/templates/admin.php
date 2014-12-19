@@ -460,9 +460,21 @@ if ($_['suggestedOverwriteWebroot']) {
                          - <strong><a href="<?php print_unescaped(OC_Config::getValue('custom_ods_changelogurl','')); ?>"><?php p($l->t('Change log')); ?></a></strong>
                 <?php endif; ?>
 <?php endif; ?>
-<?php if (OC_Config::getValue('custom_termsofserviceurl','') != ''): ?>
+<?php
+	$cguUrl = '';
+    // presence of gtu app ?
+    if(OC_APP::isEnabled('gtu')) {
+        $cguUrl = \OCP\Config::getAppvalue('gtu', 'url', '');
+    }
+    // else
+    if (empty($cguUrl)) {
+        $cguUrl = \OCP\Config::getSystemvalue('custom_termsofserviceurl', '');
+    }
+
+	if (!empty($cguUrl)):
+?>
         <br />
-        <strong><a href="<?php print_unescaped(\OCP\Config::getAppValue('gtu','url', '')); ?>"><?php p($l->t('GTU')); ?></a> version <?php echo OCP\Config::getAppValue('gtu', 'version','0') ?></strong>
+        <strong><a href="<?php print_unescaped($cguUrl); ?>"><?php p($l->t('GTU')); ?></a> version <?php echo OCP\Config::getAppValue('gtu', 'version','0') ?></strong>
 <?php endif; ?>
 </div>
 

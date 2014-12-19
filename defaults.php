@@ -66,8 +66,25 @@ class OC_Theme {
     }
 
     public function getShortFooter() {
-        //$footer = "<a href=\"". $this->getBaseUrl() . "\" target=\"_blank\">" . $this->getEntity() . "</a>" . ' – ' . $this->getSlogan(). ' – <a href="https://mycore.core-cloud.net/public.php?service=files&t=e954e28f449eb8bbb63dd19804f3f3eb" target="_blank">CGU</a>';
-        $footer = "<a href=\"". $this->getBaseUrl() . "\" target=\"_blank\">" . $this->getEntity() . "</a>" . ' – ' . $this->getSlogan(). ' – <a href="' . \OCP\Config::getAppvalue('gtu', 'url', '') . '" target="_blank">CGU</a>';
+        $baseUrl = "<a href=\"". $this->getBaseUrl() . "\" target=\"_blank\">" . $this->getEntity() . "</a>" ;
+        $slogan = $this->getSlogan();
+
+        $cguUrl = '';
+        // presence of gtu app ?
+        if(OC_APP::isEnabled('gtu')) {
+            $cguUrl = \OCP\Config::getAppvalue('gtu', 'url', '');
+        }
+        // "else"
+        if (empty($cguUrl)) {
+            $cguUrl = \OCP\Config::getSystemvalue('custom_termsofserviceurl', '');
+        }
+
+        $cgu = '';
+        if (!empty($cguUrl)) {
+            $cgu = '<a href="' . $cguUrl . '" target="_blank">CGU</a>';
+        }
+
+        $footer = $baseUrl . ' – '  .  $slogan . ' – '  . $cgu;
         return $footer;
     }
 
