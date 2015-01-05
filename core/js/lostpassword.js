@@ -101,6 +101,7 @@ OC.Lostpassword = {
     resetDone : function(result){
         var resetErrorMsg;
         if (result && result.status === 'success'){
+            $('#gohome').show();
             $.post(
                     OC.webroot + '/',
                     {
@@ -122,7 +123,7 @@ OC.Lostpassword = {
     },
 
     redirect : function(msg){
-        window.location = OC.webroot;
+        window.location = OC.webroot + '/';
     },
 
     resetError : function(msg){

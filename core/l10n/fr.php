@@ -17,5 +17,6 @@ $TRANSLATIONS = array(
 "Length of password at least: %s" => "Longueur minimale du mot de passe : %s",
 "Password must contain numbers" => "Le mot de passe doit contenir des chiffres",
 "Password must contain following special characters: %s" => "Le mot de passe doit contenir au moins un des caractères particuliers suivants : %s",
+"Password changed successfully. You should be redirected to service home page. <a href=\"/\">Click here to access home page immediatly</a>.", "Mot de passe changé avec succès. Vous allez être redirigé vers la page d'acceuil du service. <a href=\"/\">Cliquez ici pour y accéder tout de suite</a>.",
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n > 1);";

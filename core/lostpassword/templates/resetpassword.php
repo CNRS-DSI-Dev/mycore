@@ -9,6 +9,9 @@
             </p>
             <input type="submit" id="submit" value="<?php p($l->t('Reset password')); ?>" />
         </fieldset>
+        <fieldset id="gohome" style="display:none" class="warning">
+            <p><?php print_unescaped($l->t("Mot de passe changé avec succès. Vous allez être redirigé vers la page d'acceuil du service. <a href=\"/\">Cliquez ici pour y accéder tout de suite</a>.")); ?></p>
+        </fieldset>
     </form>
 
 <div id="password_policy" class="section">
