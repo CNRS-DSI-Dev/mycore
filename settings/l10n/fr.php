@@ -13,5 +13,7 @@ $TRANSLATIONS = array(
 "Please double check the <a href=\'%s\'>installation guides</a>." => "Merci de bien vérifier les <a href=\'%s\'>guides d'installation</a>.",
 "Paid client app" => "Client payant",
 "Free client app" => "Client gratuit",
+"Show storage location" => "Emplacement du stockage",
+"Show last log in" => "Dernière connexion",
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n > 1);";
