@@ -3,7 +3,7 @@
 	background-repeat: no-repeat;
 	width: 390px;
 	height: 120px;
-	margin: 0 auto;	
+	margin: 0 auto;
 }
 
 #header .logo-icon {
@@ -35,4 +35,8 @@
 
 div.clientsbox a {
 	display: inline-table;
+}
+
+div#new ul > li:first-child {
+	display:none;
 }
