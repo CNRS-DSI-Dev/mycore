@@ -65,16 +65,20 @@ class OC_Theme {
         return $this->myLogoClaim;
     }
 
+    public function getHelpUrl() {
+        return \OCP\Config::getSystemvalue('help_url', '');
+    }
+
     public function getShortFooter() {
         $baseUrl = "<a href=\"". $this->getBaseUrl() . "\" target=\"_blank\">" . $this->getEntity() . "</a>" ;
         $slogan = $this->getSlogan();
 
+        // === GTU
+
         $cguUrl = '';
-        // presence of gtu app ?
         if(OC_APP::isEnabled('gtu')) {
             $cguUrl = \OCP\Config::getAppvalue('gtu', 'url', '');
         }
-        // "else"
         if (empty($cguUrl)) {
             $cguUrl = \OCP\Config::getSystemvalue('custom_termsofserviceurl', '');
         }
@@ -84,7 +88,21 @@ class OC_Theme {
             $cgu = '<a href="' . $cguUrl . '" target="_blank">CGU</a>';
         }
 
-        $footer = $baseUrl . ' – '  .  $slogan . ' – '  . $cgu;
+        // === Help
+
+        $helpUrl = '';
+        if (empty($helpUrl)) {
+            $helpUrl = $this->getHelpUrl();
+        }
+
+        $help = '';
+        if (!empty($helpUrl)) {
+            $help = '<a href="' . $helpUrl . '" target="_blanck">Aide</a>';
+        }
+
+        // =========================
+
+        $footer = $baseUrl . ' – '  .  $slogan . ' – '  . $cgu . ' – '  . $help;
         return $footer;
     }
 
