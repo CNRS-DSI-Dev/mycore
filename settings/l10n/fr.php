@@ -15,5 +15,7 @@ $TRANSLATIONS = array(
 "Free client app" => "Client gratuit",
 "Show storage location" => "Emplacement du stockage",
 "Show last log in" => "Dernière connexion",
+"Use of these synchronization apps requires a personnal local password: " => "L'utilisation des applications des synchronisation nécessite la création d'un mot de passe local personnel : ",
+"did you ask for this password ?" => "avez vous demandé la création de ce mot de passe ?",
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n > 1);";

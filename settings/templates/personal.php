@@ -28,6 +28,11 @@
 	<?php }?>
 </div>
 
+<div id="warningpass" class="" style="margin: auto; border: 2px solid #d2322d; padding: 5px; width: 50%; text-align: center;">
+	<?php p($l->t("Use of these synchronization apps requires a personnal local password: ")); ?>
+	<a href="#user_servervars2" style="font-weight: bold; text-decoration: underline;"><?php p($l->t("did you ask for this password ?")); ?></a>
+</div>
+
 
 <div id="quota" class="section">
 	<div style="width:<?php p($_['usage_relative']);?>%;">
