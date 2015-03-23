@@ -100,9 +100,12 @@ class OC_Theme {
             $help = '<a href="' . $helpUrl . '" target="_blanck">Aide</a>';
         }
 
+        // === Local connection
+        $localConnect = '<a href="#" id="localConnect">Connexion locale</a>';
+
         // =========================
 
-        $footer = $baseUrl . ' – '  .  $slogan . ' – '  . $cgu . ' – '  . $help;
+        $footer = $baseUrl . ' – '  .  $slogan . ' – '  . $cgu . ' – '  . $help . ' – '  . $localConnect;
         return $footer;
     }
 

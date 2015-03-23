@@ -11,7 +11,7 @@
                 </noscript>
 <!-- EMBEDDED-WAYF-END -->
 
-<form method="post" name="login">
+<form method="post" name="login" id="localLogin" style="display: none;">
 	<fieldset>
 	<legend><span id="altloginswitch" style="font-size: 140%;"><?php p($l->t('Local account login')) ?></span></legend>
 	<div id="altlogin" style="display:block;">
