@@ -28,8 +28,8 @@
 	<?php }?>
 </div>
 
-<div id="warningpass" class="" style="margin: auto; border: 2px solid #d2322d; padding: 5px; width: 50%; text-align: center;">
-	<?php p($l->t("Use of these synchronization apps requires a personnal local password: ")); ?>
+<div id="warningpass" class="" style="margin: auto; border: 2px solid #d2322d; padding: 5px; width: 60%; text-align: center;">
+	<?php p($l->t("Use of these synchronization apps requires a local My CoRe password: ")); ?>
 	<a href="#user_servervars2" style="font-weight: bold; text-decoration: underline;"><?php p($l->t("did you ask for this password ?")); ?></a>
 </div>
 
@@ -48,7 +48,7 @@
 if($_['passwordChangeSupported']) {
 ?>
 <form id="passwordform" class="section">
-	<h2><?php p($l->t('Password'));?></h2>
+	<h2><?php p($l->t('Local My CoRe password'));?></h2>
 	<div id="passwordchanged"><?php echo $l->t('Your password was changed');?></div>
 	<div id="passworderror"><?php echo $l->t('Unable to change your password');?></div>
 	<input type="password" id="pass1" name="oldpassword"
@@ -62,7 +62,7 @@ if($_['passwordChangeSupported']) {
 	<input id="passwordbutton" type="submit" value="<?php echo $l->t('Change password');?>" />
 	<br/>
 
-	<p><?php print_unescaped($l->t("If you don't know your password, please see below, section <a href=\"#user_servervars2\">Useful Informations For Connection With Login/Password</a>.")); ?></p>
+	<p><?php print_unescaped($l->t("If you don't know your local My CoRe password, please see below, section <a href=\"#user_servervars2\">Useful Informations For Connection With Login / local My CoRe password</a>.")); ?></p>
 
 	<div class="strengthify-wrapper"></div>
 </form>
