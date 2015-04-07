@@ -97,7 +97,7 @@ class OC_Theme {
 
         $help = '';
         if (!empty($helpUrl)) {
-            $help = '<a href="' . $helpUrl . '" target="_blanck">Aide</a>';
+            $help = '<a href="' . $helpUrl . '" target="_blank">Aide</a>';
         }
 
         // === Local connection
