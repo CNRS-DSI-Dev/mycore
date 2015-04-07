@@ -101,11 +101,14 @@ class OC_Theme {
         }
 
         // === Local connection
-        $localConnect = '<a href="#" id="localConnect">Connexion locale</a>';
+        $localConnect = '';
+        if ($_SERVER['REQUEST_URI'] === '/') {
+            $localConnect = ' – '  . '<a href="#" id="localConnect">Connexion locale</a>';
+        }
 
         // =========================
 
-        $footer = $baseUrl . ' – '  .  $slogan . ' – '  . $cgu . ' – '  . $help . ' – '  . $localConnect;
+        $footer = $baseUrl . ' – '  .  $slogan . ' – '  . $cgu . ' – '  . $help . $localConnect;
         return $footer;
     }
 
