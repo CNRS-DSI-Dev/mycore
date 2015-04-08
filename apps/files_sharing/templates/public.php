@@ -80,6 +80,6 @@ $previewSupported = OC\Preview::isMimeSupported($_['mimetype']) ? 'true' : 'fals
 </div>
 <footer>
 	<p class="info">
-		<?php print_unescaped($theme->getLongFooter()); ?>
+		<?php print_unescaped($theme->getShortFooter()); ?>
 	</p>
 </footer>

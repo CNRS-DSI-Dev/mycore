@@ -100,20 +100,16 @@ class OC_Theme {
             $help = '<a href="' . $helpUrl . '" target="_blank">Aide</a>';
         }
 
-        // === Local connection
-        $localConnect = '';
-        if ($_SERVER['REQUEST_URI'] === '/') {
-            $localConnect = ' – '  . '<a href="#" id="localConnect">Connexion locale</a>';
-        }
-
         // =========================
-
-        $footer = $baseUrl . ' – '  .  $slogan . ' – '  . $cgu . ' – '  . $help . $localConnect;
+        $footer = $baseUrl . ' – '  .  $slogan . ' – '  . $cgu . ' – '  . $help;
         return $footer;
     }
 
     public function getLongFooter() {
-        $footer = $this->getShortFooter();
+        // === Local connection
+        $localConnect = ' – '  . '<a href="#" id="localConnect">Connexion locale</a>';
+
+        $footer = $this->getShortFooter() . $localConnect;
         return $footer;
     }
 
