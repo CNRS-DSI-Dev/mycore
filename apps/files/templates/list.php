@@ -34,7 +34,7 @@
                            value="(max <?php isset($_['uploadMaxHumanFilesize']) ? p($_['uploadMaxHumanFilesize']) : ''; ?>)">
                     <input type="file" id="file_upload_start" name='files[]'
                            data-url="<?php print_unescaped(OCP\Util::linkTo('files', 'ajax/upload.php')); ?>" />
-                    <a href="#" class="svg icon-upload"></a>
+                    <a href="#" class="svg icon-upload"><span style="position:relative;top:12px;"> <?php p($l->t("Upload")); ?></span></a>
             </div>
             <div id="uploadprogresswrapper">
                 <div id="uploadprogressbar"></div>
