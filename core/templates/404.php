@@ -1,4 +1,6 @@
 <?php
+/** @var $_ array */
+/** @var $l OC_L10N */
 if(!isset($_)) {//also provide standalone error page
 	require_once '../../../../lib/base.php';
 	
