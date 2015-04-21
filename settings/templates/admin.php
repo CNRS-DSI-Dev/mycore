@@ -6,6 +6,7 @@
  */
 /**
  * @var array $_
+ * @var \OCP\IL10N $l
  */
 $levels = array('Debug', 'Info', 'Warning', 'Error', 'Fatal');
 $levelLabels = array(
@@ -69,6 +70,20 @@ if (!$_['htaccessworking']) {
 	</span>
 
 </div>
+<?php
+}
+
+// is read only config enabled
+if ($_['readOnlyConfigEnabled']) {
+?>
+<div class="section">
+	<h2><?php p($l->t('Read-Only config enabled'));?></h2>
+
+	<span class="securitywarning">
+		<?php p($l->t('The Read-Only config has been enabled. This prevents setting some configurations via the web-interface. Furthermore, the file needs to be made writable manually for every update.')); ?>
+	</span>
+
+	</div>
 <?php
 }
 
