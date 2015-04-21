@@ -50,7 +50,7 @@ if($_['passwordChangeSupported']) {
 <form id="passwordform" class="section">
 	<h2><?php p($l->t('Local My CoRe password'));?></h2>
 	<div id="passwordchanged"><?php echo $l->t('Your password was changed');?></div>
-	<div id="passworderror"><?php echo $l->t('Unable to change your password');?></div>
+	<div id="passworderror" class="msg error" style="max-width:40em;text-align:center;"><?php echo $l->t('Unable to change your password');?></div>
 	<input type="password" id="pass1" name="oldpassword"
 		placeholder="<?php echo $l->t('Current password');?>"
 		autocomplete="off" autocapitalize="off" autocorrect="off" />
@@ -62,9 +62,9 @@ if($_['passwordChangeSupported']) {
 	<input id="passwordbutton" type="submit" value="<?php echo $l->t('Change password');?>" />
 	<br/>
 
-	<p><?php print_unescaped($l->t("If you don't know your local My CoRe password, please see below, section <a href=\"#user_servervars2\">Useful Informations For Connection With Login / local My CoRe password</a>.")); ?></p>
-
 	<div class="strengthify-wrapper"></div>
+
+	<p><?php print_unescaped($l->t("If you don't know your local My CoRe password, please see below, section <a href=\"#user_servervars2\">Useful Informations For Connection With Login / local My CoRe password</a>.")); ?></p>
 </form>
 
 <?php
