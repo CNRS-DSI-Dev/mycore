@@ -40,3 +40,18 @@ div.clientsbox a {
 div#new ul > li:first-child {
 	display:none;
 }
+
+span#helpLink {
+	color: #ccc;
+	background-color: #35537a;
+	border-radius:50%;
+	font-size: 22pt;
+	font-weight: bold;
+	margin-top: 6px;
+	padding: 3px 17px;
+	position: relative;
+	top: 22px;
+}
+span#helpLink a {
+	color: #ccc;
+}
