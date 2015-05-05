@@ -11,6 +11,7 @@ $TRANSLATIONS = array(
 "My Core - %s shared »%s« with you" => "My Core - %s a partagé %s avec vous",
 "%s shared »%s« with you" => "My Core - %s a partagé %s avec vous",
 "Share with user or group …" => "Partager avec un utilisateur ou un groupe (déjà existant)...",
+"List limited to 15 results, refine your search" => "Liste limitée à 15 résultats, affinez votre requête",
 "%s password reset" => "My Core - Réinitialisation de votre mot de passe %s",
 "Add remote share" => "Ajouter le fichier",
 "The following password restrictions are currently in place:" => "Les règles suivantes sont à respecter pour votre mot de passe :",
