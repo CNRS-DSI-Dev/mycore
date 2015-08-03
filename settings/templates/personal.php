@@ -22,12 +22,10 @@
 		<img src="<?php print_unescaped(OCP\Util::imagePath('core', 'appstore.png')); ?>" /><br/>
                 <span><?php p($l->t('Paid client app'))?></span>
 	</a>
-
-	<a href="https://www.microsoft.com/fr-fr/store/apps/owncloud-client/9nblggh0fs2v" target="_blank">
-		<img src="<?php print_unescaped(OCP\Util::imagePath('core', 'winphone-store.png')); ?>" /><br/>
+        <a href="<?php p(OC_Config::getValue('customclient_paid_windowsphone','')); ?>" target="_blank">
+                <img src="<?php print_unescaped(OCP\Util::imagePath('core', 'winphone-store.png')); ?>" /><br/>
                 <span><?php p($l->t('Paid client app'))?></span>
-	</a>
-
+        </a>
 	<?php if(OC_APP::isEnabled('firstrunwizard')) {?>
 	<p class="center"><a class="button" href="#" id="showWizard"><?php p($l->t('Show First Run Wizard again'));?></a></p>
 	<?php }?>
