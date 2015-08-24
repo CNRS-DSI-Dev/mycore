@@ -18,5 +18,6 @@ $TRANSLATIONS = array(
 "Use of these synchronization apps requires a local My CoRe password: " => "L'utilisation des applications des synchronisation nécessite la création d'un mot de passe local My CoRe : ",
 "did you ask for this password ?" => "avez vous demandé la création de ce mot de passe ?",
 "Local My CoRe password" => "Mot de passe local My CoRe",
+"Please set a password compliant with the Password Policy." => "Merci de saisir un mot de passe respectant les contraintes en cours."
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n > 1);";

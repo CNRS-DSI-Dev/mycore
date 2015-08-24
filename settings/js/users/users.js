@@ -589,8 +589,14 @@ $(document).ready(function () {
 							OC.generateUrl('/settings/users/changepassword'),
 							{username: uid, password: $(this).val(), recoveryPassword: recoveryPasswordVal},
 							function (result) {
-								if (result.status != 'success') {
-									OC.Notification.show(t('admin', result.data.message));
+								if (result.status !== 'success') /*{
+									OC.Notification.show(t('admin', 'Password successfully changed.'));
+								}
+								else */{
+									OC.Notification.show(t('settings', 'Please set a password compliant with the Password Policy.'));
+									setTimeout(function() {
+										OC.Notification.hide();
+									}, 10000);
 								}
 							}
 						);
