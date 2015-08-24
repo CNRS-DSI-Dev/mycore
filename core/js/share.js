@@ -384,7 +384,7 @@ OC.Share={
 			html += '<span class="shareWithLoading icon-loading-small hidden"></span>';
 
 			// Mantis 37472, add a help text
-			html += '<div id="maxHelp" style="font-size: 80%; color: #666;font-style: italic; text-align: center">' + t('core', 'List limited to 15 results, refine your search') + '</div>';
+			html += '<div id="maxHelp" style="font-size: 80%; color: #666;font-style: italic; text-align: center">' + t('core', 'For your information, the results list is limited to 15 items.') + '</div>';
 
 			html += '<ul id="shareWithList">';
 			html += '</ul>';
