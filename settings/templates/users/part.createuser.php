@@ -1,3 +1,6 @@
+<?php
+	$ppe_url = \OCP\Config::getSystemValue('password_policy_faq', '');
+?>
 <div id="controls">
 	<form id="newuser" autocomplete="off">
 		<input id="newusername" type="text"
@@ -19,7 +22,13 @@
 		</select>
 		<input type="submit" class="button" value="<?php p($l->t('Create'))?>" />
 	</form>
-	<span id="ppe_warning" style="color: red; font-weight: bold"><?php print_unescaped($l->t("Warning : <a href=\"/index.php/settings/personal#ppe\">password constraints</a> must be respected!")); ?></span>
+	<span id="ppe_warning" style="color: red; font-weight: bold">
+		<?php
+			print_unescaped($l->t("Warning : <a href=\"")) ;
+			print_unescaped($ppe_url) ;
+			print_unescaped($l->t("\">password constraints</a> must be respected!"));
+		?>
+	</span>
 	<?php if((bool)$_['recoveryAdminEnabled']): ?>
 	<div class="recoveryPassword">
 	<input id="recoveryPassword"

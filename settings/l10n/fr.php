@@ -19,6 +19,7 @@ $TRANSLATIONS = array(
 "did you ask for this password ?" => "avez vous demandé la création de ce mot de passe ?",
 "Local My CoRe password" => "Mot de passe local My CoRe",
 "Please set a password compliant with the Password Policy." => "Merci de saisir un mot de passe respectant les contraintes en cours.",
-"Warning : <a href=\"/index.php/settings/personal#ppe\">password constraints</a> must be respected!" => "Attention, il est nécessaire de respecter <a href=\"/index.php/settings/personal#ppe\">les contraintes sur les mots de passe</a>.",
+"Warning : <a href=\"" => "Attention, il est nécessaire de respecter <a href=\"",
+"\">password constraints</a> must be respected!" => "\">les contraintes sur les mots de passe</a>.",
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n > 1);";
