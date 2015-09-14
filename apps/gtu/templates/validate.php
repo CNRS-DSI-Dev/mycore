@@ -30,7 +30,7 @@ $msg = isset($_['msg']) ? $_['msg']: ''
 
 ?>
 <!-- block firstrunwizard https://github.com/owncloud/firstrunwizard/blob/master/js/activate.js with empty error class-->
-<div class="error">GTU</div>
+<div class="error" style="display:none;">GTU</div>
 <div class="overlay">
 	<div id="app" ng-app="Gtu" ng-controller="ValidateAppCtrl">
 		<div id="app-content" ng-view ng-class="{loading: is.loading}">
