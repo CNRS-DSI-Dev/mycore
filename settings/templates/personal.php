@@ -219,6 +219,9 @@ foreach($_['commonlanguages'] as $language) {
 		<?php if (OC_Config::getValue('custom_ods_changelogurl','') != ''): ?>
 			 - <strong><a href="<?php print_unescaped(OC_Config::getValue('custom_ods_changelogurl','')); ?>"><?php p($l->t('Change log')); ?></a></strong>
 		<?php endif; ?>
+		<?php if ($hostname = @gethostname()): ?>
+			 <span style="color: #fff">- <?php p($hostname); ?></span>
+		<?php endif; ?>
 <?php endif; ?>
 <?php
 	$cguUrl = '';
