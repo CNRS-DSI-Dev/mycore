@@ -89,7 +89,6 @@ class OC_Theme {
         }
 
         // === Help
-
         $helpUrl = '';
         if (empty($helpUrl)) {
             $helpUrl = $this->getHelpUrl();
@@ -100,8 +99,11 @@ class OC_Theme {
             $help = '<a href="' . $helpUrl . '" target="_blank">Aide</a>';
         }
 
+        // === contact
+        $contact = ' – '  . '<a href="http://ods.cnrs.fr/contacts.html" target="_blank">Contacts</a>';
+
         // =========================
-        $footer = $baseUrl . ' – '  .  $slogan . ' – '  . $cgu . ' – '  . $help;
+        $footer = $baseUrl . ' – '  .  $slogan . ' – '  . $cgu . ' – '  . $help . $contact;
         return $footer;
     }
 
