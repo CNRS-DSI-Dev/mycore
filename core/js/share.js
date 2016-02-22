@@ -484,6 +484,10 @@ OC.Share={
 				// Default permissions are Edit (CRUD) and Share
 				// Check if these permissions are possible
 				var permissions = OC.PERMISSION_READ;
+
+				/**
+				Mantis 42058 : partage fichier : lecture seule par défaut
+
 				if (possiblePermissions & OC.PERMISSION_UPDATE) {
 					permissions = permissions | OC.PERMISSION_UPDATE;
 				}
@@ -495,7 +499,8 @@ OC.Share={
 				}
 				if (oc_appconfig.core.resharingAllowed && (possiblePermissions & OC.PERMISSION_SHARE)) {
 					permissions = permissions | OC.PERMISSION_SHARE;
-				}
+				}*/
+
 
 
 				var $input = $(this);
@@ -1181,6 +1186,7 @@ $(document).ready(function() {
 });
 
 	$(document).on('click', '#fakeval', function() {
+
 		if (!OC.Notification.isHidden()) {
 			OC.Notification.hide();
 		}
