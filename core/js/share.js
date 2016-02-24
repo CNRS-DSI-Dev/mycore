@@ -56,7 +56,6 @@ OC.Share={
 				fetch: 'getItemsSharedStatuses',
 				itemType: itemType
 			}, function(result) {
-				console.log(result);
 				if (result && result.status === 'success') {
 					OC.Share.statuses = {};
 					$.each(result.data, function(item, data) {
