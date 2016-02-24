@@ -56,6 +56,7 @@ OC.Share={
 				fetch: 'getItemsSharedStatuses',
 				itemType: itemType
 			}, function(result) {
+				console.log(result);
 				if (result && result.status === 'success') {
 					OC.Share.statuses = {};
 					$.each(result.data, function(item, data) {
@@ -629,7 +630,9 @@ OC.Share={
 			}
 
 			// deactivated by default
-			editChecked = createChecked = updateChecked = deleteChecked = shareChecked = '';
+			//
+			// Mantis 42058
+			//editChecked = createChecked = updateChecked = deleteChecked = shareChecked = '';
 
 			var html = '<li style="clear: both;" data-share-type="'+escapeHTML(shareType)+'" data-share-with="'+escapeHTML(shareWith)+'" title="' + escapeHTML(shareWith) + '">';
 			var showCrudsButton;
@@ -1183,7 +1186,7 @@ $(document).ready(function() {
 			}
 		});
 
-});
+	});
 
 	$(document).on('click', '#fakeval', function() {
 
@@ -1201,5 +1204,45 @@ $(document).ready(function() {
 			}, 10000);
 	});
 
+
+	// Mantis 42058 - réinitialisation des droits d'un dossier partagé afin d'enlever la permission de mise à jour (mise par défaut)
+	(function() {
+		var oldInitialize = OCA.Sharing.Util.initialize;
+
+		OCA.Sharing.Util.initialize = function() {
+			oldInitialize.apply(this, arguments);
+
+			var oldCreateRow = OCA.Files.FileList.prototype._createRow;
+			OCA.Files.FileList.prototype._createRow = function(fileData) {
+				var tr = oldCreateRow.apply(this, arguments);
+				if (fileData.isShareMountPoint) {
+					var permissions = tr.attr('data-permissions');
+
+					jQuery.ajax({
+						url: OC.filePath('core', 'ajax', 'share.php'),
+						type: 'GET',
+						async: false,
+						data: {
+							fetch: 'getItem',
+							itemType: 'folder',
+							itemSource: fileData.id,
+							checkReshare: true,
+							checkShares: true
+						},
+						success: function(result) {
+							if (result.data.reshare.permissions == 1) {
+								fileData.permissions = permissions = 9;
+							}
+						}
+					});
+
+					tr.attr('data-permissions', permissions);
+					tr.attr('data-share-permissions', permissions);
+				}
+
+				return tr;
+			}
+		}
+	})();
 
 });
