@@ -484,6 +484,10 @@ OC.Share={
 				// Default permissions are Edit (CRUD) and Share
 				// Check if these permissions are possible
 				var permissions = OC.PERMISSION_READ;
+
+				/**
+				Mantis 42058 : partage fichier : lecture seule par défaut
+
 				if (possiblePermissions & OC.PERMISSION_UPDATE) {
 					permissions = permissions | OC.PERMISSION_UPDATE;
 				}
@@ -495,7 +499,8 @@ OC.Share={
 				}
 				if (oc_appconfig.core.resharingAllowed && (possiblePermissions & OC.PERMISSION_SHARE)) {
 					permissions = permissions | OC.PERMISSION_SHARE;
-				}
+				}*/
+
 
 
 				var $input = $(this);
@@ -624,7 +629,9 @@ OC.Share={
 			}
 
 			// deactivated by default
-			editChecked = createChecked = updateChecked = deleteChecked = shareChecked = '';
+			//
+			// Mantis 42058
+			//editChecked = createChecked = updateChecked = deleteChecked = shareChecked = '';
 
 			var html = '<li style="clear: both;" data-share-type="'+escapeHTML(shareType)+'" data-share-with="'+escapeHTML(shareWith)+'" title="' + escapeHTML(shareWith) + '">';
 			var showCrudsButton;
@@ -1178,9 +1185,10 @@ $(document).ready(function() {
 			}
 		});
 
-});
+	});
 
 	$(document).on('click', '#fakeval', function() {
+
 		if (!OC.Notification.isHidden()) {
 			OC.Notification.hide();
 		}
@@ -1195,5 +1203,45 @@ $(document).ready(function() {
 			}, 10000);
 	});
 
+
+	// Mantis 42058 - réinitialisation des droits d'un dossier partagé afin d'enlever la permission de mise à jour (mise par défaut)
+	(function() {
+		var oldInitialize = OCA.Sharing.Util.initialize;
+
+		OCA.Sharing.Util.initialize = function() {
+			oldInitialize.apply(this, arguments);
+
+			var oldCreateRow = OCA.Files.FileList.prototype._createRow;
+			OCA.Files.FileList.prototype._createRow = function(fileData) {
+				var tr = oldCreateRow.apply(this, arguments);
+				if (fileData.isShareMountPoint) {
+					var permissions = tr.attr('data-permissions');
+
+					jQuery.ajax({
+						url: OC.filePath('core', 'ajax', 'share.php'),
+						type: 'GET',
+						async: false,
+						data: {
+							fetch: 'getItem',
+							itemType: 'folder',
+							itemSource: fileData.id,
+							checkReshare: true,
+							checkShares: true
+						},
+						success: function(result) {
+							if (result.data.reshare.permissions == 1) {
+								fileData.permissions = permissions = 9;
+							}
+						}
+					});
+
+					tr.attr('data-permissions', permissions);
+					tr.attr('data-share-permissions', permissions);
+				}
+
+				return tr;
+			}
+		}
+	})();
 
 });
