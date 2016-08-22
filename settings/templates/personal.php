@@ -137,7 +137,7 @@ foreach($_['commonlanguages'] as $language) {
 		<?php endforeach;?>
 	</select>
 	<?php if (OC_Util::getEditionString() === ''): ?>
-	<a href="http://www.offres-de-services-unites.net/contacts.html"
+	<a href="http://ods.cnrs.fr/contacts.html"
 		target="_blank">
 		<em><?php p($l->t('Help translate My CoRe'));?></em>
 	</a> /
