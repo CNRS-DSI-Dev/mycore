@@ -22,7 +22,7 @@ class OC_Theme {
         $this->myEntity = "CNRS"; /* e.g. company name, used for footers and copyright notices */
         $this->myName = "Service My CoRe"; /* short name, used when referring to the service */
         $this->myTitle = "My CoRe"; /* can be a longer name, for titles */
-        $this->myBaseUrl = "http://www.offres-de-services-unites.net";
+        $this->myBaseUrl = "http://ods.cnrs.fr/";
         $this->mySlogan = "My CoRe, partage et nomadisme";
         $this->myLogoClaim = "";
         $this->myDocBaseUrl = "https://aide.core-cloud.net/mycore/";
