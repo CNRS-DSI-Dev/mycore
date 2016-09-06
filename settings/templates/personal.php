@@ -248,7 +248,7 @@ foreach($_['commonlanguages'] as $language) {
 
 		?>
 		<?php if (!empty($hostname)): ?>
-			 <span style="color: #fff">- <?php p($hostname . $origin); ?></span>
+			 <span>- <?php p($hostname) ?> </span><span style="color: #fff"> <?php p($origin); ?></span>
 		<?php endif; ?>
 <?php endif; ?>
 <?php
