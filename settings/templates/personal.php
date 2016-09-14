@@ -2,27 +2,59 @@
  * Copyright (c) 2011, Robin Appelman <icewind1991@gmail.com>
  * This file is licensed under the Affero General Public License version 3 or later.
  * See the COPYING-README file.
- */?>
+ */
+
+/** @var $_ mixed[]|\OCP\IURLGenerator[] */
+/** @var \OC_Defaults $theme */
+
+
+// My CoRe: change left menu
+
+foreach($_['forms'] as $key => $form) {
+	if ($form['anchor'] == 'avatar') {
+		$_['forms'][$key]['anchor'] = 'quota';
+	}
+	if ($form['anchor'] == 'clientsbox') {
+		unset($_['forms'][$key]);
+	}
+};
+$_['forms'][]= ['anchor' => 'versionId', 'section-name' => $l->t('Version My CoRe')];
+
+?>
+
+<div id="app-navigation">
+	<ul>
+	<?php foreach($_['forms'] as $form) {
+		if (isset($form['anchor'])) {
+			$anchor = '#' . $form['anchor'];
+			$sectionName = $form['section-name'];
+			print_unescaped(sprintf("<li><a href='%s'>%s</a></li>", \OCP\Util::sanitizeHTML($anchor), \OCP\Util::sanitizeHTML($sectionName)));
+		}
+	}?>
+	</ul>
+</div>
+
+<div id="app-content">
 
 <div class="clientsbox center">
 	<h2><?php p($l->t('Get the apps to sync your files'));?></h2>
 	<a href="<?php p($_['clients']['desktop']); ?>" target="_blank">
-		<img src="<?php print_unescaped(OCP\Util::imagePath('core', 'desktopapp.png')); ?>" /><br/>
+		<img src="<?php print_unescaped(OCP\Util::imagePath('core', 'desktopapp.svg')); ?>" /><br/>
                 <span><?php p($l->t('Free client app'))?></span>
 	</a>
 	<a href="<?php p($_['clients']['android']); ?>" target="_blank">
 		<img src="<?php print_unescaped(OCP\Util::imagePath('core', 'googleplay.png')); ?>" /><br/>
 		<span><?php p($l->t('Paid client app'))?></span>
 	</a>
-	<a href="<?php p(OC_Config::getValue('customclient_free_android','')); ?>" target="_blank">
+	<a href="<?php p(\OCP\Config::getSystemValue('customclient_free_android','')); ?>" target="_blank">
 		<img src="<?php print_unescaped(OCP\Util::imagePath('core', 'googleplay.png')); ?>" /><br/>
 		<span><?php p($l->t('Free client app'))?></span>
 	</a>
 	<a href="<?php p($_['clients']['ios']); ?>" target="_blank">
-		<img src="<?php print_unescaped(OCP\Util::imagePath('core', 'appstore.png')); ?>" /><br/>
+		<img src="<?php print_unescaped(OCP\Util::imagePath('core', 'appstore.svg')); ?>" /><br/>
                 <span><?php p($l->t('Paid client app'))?></span>
 	</a>
-        <a href="<?php p(OC_Config::getValue('customclient_paid_windowsphone','')); ?>" target="_blank">
+        <a href="<?php p(\OCP\Config::getSystemValue('customclient_paid_windowsphone','')); ?>" target="_blank">
                 <img src="<?php print_unescaped(OCP\Util::imagePath('core', 'winphone-store.png')); ?>" /><br/>
                 <span><?php p($l->t('Paid client app'))?></span>
         </a>
@@ -38,25 +70,29 @@
 
 
 <div id="quota" class="section">
-	<div style="width:<?php p($_['usage_relative']);?>%;">
+	<div style="width:<?php p($_['usage_relative']);?>%"
+		<?php if($_['usage_relative'] > 80): ?> class="quota-warning" <?php endif; ?>>
 		<p id="quotatext">
-			<?php print_unescaped($l->t('You have used <strong>%s</strong> of the available <strong>%s</strong>',
+			<?php print_unescaped($l->t('You are using <strong>%s</strong> of <strong>%s</strong>',
 			array($_['usage'], $_['total_space'])));?>
 		</p>
 	</div>
 </div>
 
-
 <?php
 if($_['passwordChangeSupported']) {
+	script('jquery-showpassword');
 ?>
 <form id="passwordform" class="section">
 	<h2><?php p($l->t('Local My CoRe password'));?></h2>
-	<div id="passwordchanged"><?php echo $l->t('Your password was changed');?></div>
-	<div id="passworderror" class="msg error" style="max-width:40em;text-align:center;"><?php echo $l->t('Unable to change your password');?></div>
+	<div class="hidden icon-checkmark" id="password-changed"></div>
+	<div class="hidden" id="password-error"><?php p($l->t('Unable to change your password'));?></div>
+	<br>
+	<label for="pass1" class="hidden-visually"><?php echo $l->t('Current password');?>: </label>
 	<input type="password" id="pass1" name="oldpassword"
 		placeholder="<?php echo $l->t('Current password');?>"
 		autocomplete="off" autocapitalize="off" autocorrect="off" />
+	<label for="pass2" class="hidden-visually"><?php echo $l->t('New password');?>: </label>
 	<input type="password" id="pass2" name="personal-password"
 		placeholder="<?php echo $l->t('New password');?>"
 		data-typetoggle="#personal-show"
@@ -64,7 +100,6 @@ if($_['passwordChangeSupported']) {
 	<input type="checkbox" id="personal-show" name="show" /><label for="personal-show"></label>
 	<input id="passwordbutton" type="submit" value="<?php echo $l->t('Change password');?>" />
 	<br/>
-
 	<div class="strengthify-wrapper"></div>
 
 	<p><?php print_unescaped($l->t("If you don't know your local My CoRe password, please see below, section <a href=\"#user_servervars2\">Useful Informations For Connection With Login / local My CoRe password</a>.")); ?></p>
@@ -77,40 +112,51 @@ if($_['passwordChangeSupported']) {
 <?php
 if($_['displayNameChangeSupported']) {
 ?>
-<form id="displaynameform" class="section">
-	<h2><?php echo $l->t('Full Name');?></h2>
-	<input type="text" id="displayName" name="displayName"
-		value="<?php p($_['displayName'])?>"
+<form id="lostpassword" class="section">
+	<h2>
+		<label for="email"><?php p($l->t('Email'));?></label>
+	</h2>
+	<input type="email" name="email" id="email" value="<?php p($_['email']); ?>"
+		placeholder="<?php p($l->t('Your email address'));?>"
 		autocomplete="on" autocapitalize="off" autocorrect="off" />
-    <span class="msg"></span>
-	<input type="hidden" id="oldDisplayName" name="oldDisplayName" value="<?php p($_['displayName'])?>" />
+	<span class="msg"></span><br />
+	<em><?php p($l->t('For password recovery and notifications'));?></em>
 </form>
 <?php
 }
 ?>
 
 <?php if ($_['enableAvatars']): ?>
-<form id="avatar" class="section" method="post" action="<?php p(\OC_Helper::linkToRoute('core_avatar_post')); ?>">
+<form id="avatar" class="section" method="post" action="<?php p(\OC::$server->getURLGenerator()->linkToRoute('core.avatar.postAvatar')); ?>">
 	<h2><?php p($l->t('Profile picture')); ?></h2>
 	<div id="displayavatar">
-		<div class="avatardiv"></div><br>
+		<div class="avatardiv"></div>
 		<div class="warning hidden"></div>
 		<?php if ($_['avatarChangeSupported']): ?>
-		<div class="inlineblock button" id="uploadavatarbutton"><?php p($l->t('Upload new')); ?></div>
-		<input type="file" class="hidden" name="files[]" id="uploadavatar">
-		<div class="inlineblock button" id="selectavatar"><?php p($l->t('Select new from Files')); ?></div>
-		<div class="inlineblock button" id="removeavatar"><?php p($l->t('Remove image')); ?></div><br>
-		<?php p($l->t('Either png or jpg. Ideally square but you will be able to crop it.')); ?>
+		<label for="uploadavatar" class="inlineblock button icon-upload" id="uploadavatarbutton" title="<?php p($l->t('Upload new')); ?>"></label>
+		<div class="inlineblock button icon-folder" id="selectavatar" title="<?php p($l->t('Select from Files')); ?>"></div>
+		<div class="hidden button icon-delete" id="removeavatar" title="<?php p($l->t('Remove image')); ?>"></div>
+		<input type="file" name="files[]" id="uploadavatar" class="hiddenuploadfield">
+		<p><em><?php p($l->t('png or jpg, max. 20 MB')); ?></em></p>
 		<?php else: ?>
-		<?php p($l->t('Your avatar is provided by your original account.')); ?>
+		<?php p($l->t('Picture provided by original account')); ?>
 		<?php endif; ?>
 	</div>
+
 	<div id="cropper" class="hidden">
 		<div class="inlineblock button" id="abortcropperbutton"><?php p($l->t('Cancel')); ?></div>
-		<div class="inlineblock button primary" id="sendcropperbutton"><?php p($l->t('Choose as profile image')); ?></div>
+		<div class="inlineblock button primary" id="sendcropperbutton"><?php p($l->t('Choose as profile picture')); ?></div>
 	</div>
 </form>
 <?php endif; ?>
+
+<div id="groups" class="section">
+	<h2><?php p($l->t('Groups')); ?></h2>
+	<p><?php p($l->t('You are member of the following groups:')); ?></p>
+	<p>
+	<?php p(implode(', ', $_['groups'])); ?>
+	</p>
+</div>
 
 <?php
 // create a sub-array for only the two languages we're using
@@ -125,7 +171,9 @@ foreach($_['commonlanguages'] as $language) {
 }
 ?>
 <form class="section">
-	<h2><?php p($l->t('Language'));?></h2>
+	<h2>
+		<label for="languageinput"><?php p($l->t('Language'));?></label>
+	</h2>
 	<select id="languageinput" name="lang" data-placeholder="<?php p($l->t('Language'));?>">
 		<option value="<?php p($_['activelanguage']['code']);?>">
 			<?php p($_['activelanguage']['name']);?>
@@ -148,8 +196,59 @@ foreach($_['commonlanguages'] as $language) {
 	<?php endif; ?>
 </form>
 
+<div id="sessions" class="section">
+	<h2><?php p($l->t('Sessions'));?></h2>
+	<span class="hidden-when-empty"><?php p($l->t('These are the web, desktop and mobile clients currently logged in to your ownCloud.'));?></span>
+	<table>
+		<thead class="token-list-header">
+			<tr>
+				<th><?php p($l->t('Browser'));?></th>
+				<th><?php p($l->t('Most recent activity'));?></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody class="token-list icon-loading">
+		</tbody>
+	</table>
+</div>
+
+<div id="apppasswords" class="section">
+	<h2><?php p($l->t('App passwords'));?></h2>
+	<span class="hidden-when-empty"><?php p($l->t("You've linked these apps."));?></span>
+	<table>
+		<thead class="hidden-when-empty">
+			<tr>
+				<th><?php p($l->t('Name'));?></th>
+				<th><?php p($l->t('Most recent activity'));?></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody class="token-list icon-loading">
+		</tbody>
+	</table>
+	<p><?php p($l->t('An app password is a passcode that gives an app or device permissions to access your %s account.', [$theme->getName()]));?></p>
+	<div id="app-password-form">
+		<input id="app-password-name" type="text" placeholder="<?php p($l->t('App name')); ?>">
+		<button id="add-app-password" class="button"><?php p($l->t('Create new app password')); ?></button>
+	</div>
+	<div id="app-password-result" class="hidden">
+		<span><?php p($l->t('Use the credentials below to configure your app or device.')); ?></span>
+		<div class="app-password-row">
+			<span class="app-password-label"><?php p($l->t('Username')); ?></span>
+			<input id="new-app-login-name" type="text" readonly="readonly"/>
+		</div>
+		<div class="app-password-row">
+			<span class="app-password-label"><?php p($l->t('Password')); ?></span>
+			<input id="new-app-password" type="text" readonly="readonly"/>
+			<button id="app-password-hide" class="button"><?php p($l->t('Done')); ?></button>
+		</div>
+	</div>
+</div>
+
 <?php foreach($_['forms'] as $form) {
-	print_unescaped($form);
+	if (isset($form['form']) and isset($form['form']['page'])) {?>
+	<div id="<?php isset($form['anchor']) ? p($form['anchor']) : p('');?>"><?php print_unescaped($form['form']['page']);?></div>
+	<?php }
 };?>
 
 <?php if($_['enableDecryptAll']): ?>
@@ -207,17 +306,14 @@ foreach($_['commonlanguages'] as $language) {
 </div>
 	<?php endif; ?>
 
-<div class="section">
+<div class="section" id="versionId">
 	<h2><?php p($l->t('Version'));?></h2>
-	<strong>ownCloud</strong> <?php p(OC_Util::getHumanVersion()) ?><br />
-<?php if (OC_Util::getEditionString() === ''): ?>
-	<?php print_unescaped($l->t('Developed by the <a href="http://ownCloud.org/contact" target="_blank">ownCloud community</a>, the <a href="https://github.com/owncloud" target="_blank">source code</a> is licensed under the <a href="http://www.gnu.org/licenses/agpl-3.0.html" target="_blank"><abbr title="Affero General Public License">AGPL</abbr></a>.')); ?>
-<?php endif; ?>
-<?php if (OC_Config::getValue('custom_ods_version','') != ''): ?>
-	<br />
-	<strong><?php p($l->t('Version of %s:', $theme->getTitle()).' '.OC_Config::getValue('custom_ods_version','')); ?></strong>
-		<?php if (OC_Config::getValue('custom_ods_changelogurl','') != ''): ?>
-			 - <strong><a href="<?php print_unescaped(OC_Config::getValue('custom_ods_changelogurl','')); ?>"><?php p($l->t('Change log')); ?></a></strong>
+	<p><strong>ownCloud</strong> <?php p(OC_Util::getHumanVersion()) ?></p>
+	<p><?php include('settings.development.notice.php'); ?></p>
+<?php if (\OCP\Config::getSystemValue('custom_ods_version','') != ''): ?>
+	<strong><?php p($l->t('Version of %s:', $theme->getTitle()).' '.\OCP\Config::getSystemValue('custom_ods_version','')); ?></strong>
+		<?php if (\OCP\Config::getSystemValue('custom_ods_changelogurl','') != ''): ?>
+			 - <strong><a href="<?php print_unescaped(\OCP\Config::getSystemValue('custom_ods_changelogurl','')); ?>"><?php p($l->t('Change log')); ?></a></strong>
 		<?php endif; ?>
 		<?php
 			// redhat style
@@ -271,4 +367,6 @@ foreach($_['commonlanguages'] as $language) {
 
 <div class="section credits-footer">
 	<p><?php print_unescaped($theme->getShortFooter()); ?></p>
+</div>
+
 </div>

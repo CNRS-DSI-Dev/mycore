@@ -1,7 +1,7 @@
 <?php
 if(!isset($_)) {//also provide standalone error page
 	require_once '../../lib/base.php';
-	
+
 	$tmpl = new OC_Template( '', '502', 'guest' );
 	$tmpl->printPage();
 	exit;
@@ -14,7 +14,7 @@ if(!isset($_)) {//also provide standalone error page
 	</li>
 </ul>
 <div>
-<p><a target="_blank" class="button" href="<?php print_unescaped(OC_Config::getValue('custom_knowledgebaseurl',''));?>"><?php p($l->t('Documentation'));?></a>
+<p><a target="_blank" class="button" href="<?php print_unescaped(\OCP\Config::getSystemValue('custom_knowledgebaseurl',''));?>"><?php p($l->t('Documentation'));?></a>
 </p>
 </div>
 
