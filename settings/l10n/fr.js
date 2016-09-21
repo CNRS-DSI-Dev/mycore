@@ -21,6 +21,6 @@ OC.L10N.register(
         "Local My CoRe password" : "Mot de passe local My CoRe",
         "Please set a password compliant with the Password Policy." : "Merci de saisir un mot de passe respectant les contraintes en cours.",
         "Warning : <a href=\"" : "Attention, il est nécessaire de respecter <a href=\"",
-        "\">password constraints</a> must be respected!" : "\">les contraintes sur les mots de passe</a>.",
+        "\">password constraints</a> must be respected!" : "\">les contraintes sur les mots de passe</a>."
     },
 "nplurals=2; plural=(n > 1);");

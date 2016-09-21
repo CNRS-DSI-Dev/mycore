@@ -1,8 +1,7 @@
-{ "translations":
-    {
+{ "translations": {
         "Files" : "Mes Fichiers",
         "Welcome to %s!" : "Bienvenue Dans %s !",
         "Upload" : "Téléverser"
-    },
-    "pluralForm" :"nplurals=2; plural=(n > 1);"
+},
+"pluralForm" :"nplurals=2; plural=(n > 1);"
 }
