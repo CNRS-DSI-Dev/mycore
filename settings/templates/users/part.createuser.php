@@ -16,6 +16,7 @@
 		<div class="groups"><div class="groupsListContainer multiselect button" data-placeholder="<?php p($l->t('Groups'))?>"><span class="title groupsList"></span><span class="icon-triangle-s"></span></div></div>
 		<input type="submit" class="button" value="<?php p($l->t('Create'))?>" />
 	</form>
+
 	<span id="ppe_warning" style="color: red; font-weight: bold">
 		<?php
 			print_unescaped($l->t("Warning : <a href=\"")) ;
@@ -23,6 +24,16 @@
 			print_unescaped($l->t("\">password constraints</a> must be respected!"));
 		?>
 	</span>
+
+	<form class="searchbox" action="#" method="post" role="search" novalidate>
+		<label for="searchbox" class="hidden-visually">
+			<?php p($l->t('Search'));?>
+		</label>
+		<input id="searchbox" type="search" name="query"
+			value="" required
+			autocomplete="off" tabindex="5">
+	</form>
+
 	<?php if((bool)$_['recoveryAdminEnabled']): ?>
 	<div class="recoveryPassword">
 	<input id="recoveryPassword"
