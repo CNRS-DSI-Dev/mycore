@@ -290,7 +290,8 @@ input.userFilter {width: 200px;}
 	display: inline;
 }
 #controls .searchbox input[type="search"] {
-	background-color: rgba(240,240,240,0.9);
+	background: rgba(240,240,240,0.9) url('../../../../core/img/actions/search.svg' ) no-repeat 6px center;
+	border: 1px solid #ddd;
 	color: #555;
 	font-size: 13px;
 	margin-right: 20px;
