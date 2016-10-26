@@ -93,7 +93,7 @@ script('core', [
 	</div>
 	</fieldset>
 </form>
-<?php if (!empty($_['alt_login'])) { ?>
+<?php if (!empty($_['alt_login']) and false) { ?>
 <form id="alternative-logins">
 	<fieldset>
 		<legend><?php p($l->t('Alternative Logins')) ?></legend>
