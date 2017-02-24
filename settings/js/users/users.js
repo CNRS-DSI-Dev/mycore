@@ -685,7 +685,7 @@ $(document).ready(function () {
 									OC.Notification.show(t('admin', 'Password successfully changed.'));
 								}
 								else */{
-									OC.Notification.show(t('settings', 'Please set a password compliant with the Password Policy.'));					
+									OC.Notification.showTemporary(t('settings', 'Please set a password compliant with the Password Policy.'));					
 								}
 							}
 						);
