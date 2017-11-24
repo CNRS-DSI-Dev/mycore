@@ -13,8 +13,10 @@ var UserDeleteHandler;
 var UserList = {
 	availableGroups: [],
 	offset: 0,
-	usersToLoad: 10, //So many users will be loaded when user scrolls down
-	initialUsersToLoad: 50, //initial number of users to load
+	usersToLoad: 200,
+	initialUsersToLoad: 200, // initial number of users to load
+	perPageUsersToLoad: 100, // users to load when user scrolls down
+	currentUser: '',
 	currentGid: '',
 	filter: '',
 
@@ -25,8 +27,11 @@ var UserList = {
 	initialize: function($el) {
 		this.$el = $el;
 
+		UserList.currentUser = OC.getCurrentUser().uid;
+
 		// initially the list might already contain user entries (not fully ajaxified yet)
 		// initialize these entries
+		this.$el.find('.isEnabled').on('change', this.onEnabledChange);
 		this.$el.find('.quota-user').singleSelect().on('change', this.onQuotaSelect);
 	},
 
@@ -39,6 +44,7 @@ var UserList = {
 	 * 				'displayname': 		'Users display name',
 	 * 				'groups': 			['group1', 'group2'],
 	 * 				'subadmin': 		['group4', 'group5'],
+	 *				'enabled'			'true'
 	 *				'quota': 			'10 GB',
 	 *				'storageLocation':	'/srv/www/owncloud/data/username',
 	 *				'lastLogin':		'1418632333'
@@ -94,6 +100,17 @@ var UserList = {
 		var $tdSubadmins = $tr.find('td.subadmins');
 		this._updateGroupListLabel($tdSubadmins, user.subadmin);
 		$tdSubadmins.find('.action').tooltip({placement: 'top'});
+
+		/**
+		 * enabled
+		 */
+		var $tdEnabled = $tr.find('.isEnabled');
+		if(user.name !== UserList.currentUser) {
+			$tdEnabled.attr("checked", user.isEnabled);
+			$tdEnabled.on('change', UserList.onEnabledChange);
+		} else {
+			$tdEnabled.remove();
+		}
 
 		/**
 		 * remove action
@@ -273,9 +290,8 @@ var UserList = {
 		this.scrollArea.scrollLeft(lastScrollLeft);
 	},
 	checkUsersToLoad: function() {
-		//30 shall be loaded initially, from then on always 10 upon scrolling
 		if(UserList.isEmpty === false) {
-			UserList.usersToLoad = 10;
+			UserList.usersToLoad = UserList.perPageUsersToLoad;
 		} else {
 			UserList.usersToLoad = UserList.initialUsersToLoad;
 		}
@@ -361,15 +377,7 @@ var UserList = {
 		$userListBody.on('click', '.delete', function () {
 			// Call function for handling delete/undo
 			var uid = UserList.getUID(this);
-			OC.dialogs.confirm(
-				t('settings', 'Confirm suppression of {userID} user ?', {userID: uid}),
-				t('settings', 'User suppression'),
-				function(okToSuppress) {
-					if (okToSuppress) {
-						UserDeleteHandler.mark(uid);
-					}
-				}
-			);
+			UserDeleteHandler.mark(uid);
 		});
 
 		//delete a marked user when leaving the page
@@ -404,7 +412,7 @@ var UserList = {
 					if(UserList.has(user.name)) {
 						return true;
 					}
-					var $tr = UserList.add(user, user.lastLogin, false, user.backend);
+					var $tr = UserList.add(user, false);
 					trs.push($tr);
 					loadedUsers++;
 				});
@@ -532,7 +540,10 @@ var UserList = {
 		if (quota === 'other') {
 			return;
 		}
-		if (isNaN(parseInt(quota, 10)) || parseInt(quota, 10) < 0) {
+		if (
+			['default', 'none'].indexOf(quota) === -1
+			&& (OC.Util.computerFileSize(quota) === null)
+		) {
 			// the select component has added the bogus value, delete it again
 			$select.find('option[selected]').remove();
 			OC.Notification.showTemporary(t('core', 'Invalid quota value "{val}"', {val: quota}));
@@ -562,6 +573,50 @@ var UserList = {
 			}
 		);
 	},
+
+	/**
+         * Event handler for when a enabled value has been changed.
+         * This will save the value.
+         */
+        onEnabledChange: function() {
+                var $select = $(this);
+                var uid = UserList.getUID($select);
+                var enabled = $select.prop('checked') ? 'true' : 'false';
+
+                UserList._updateEnabled(uid, enabled,
+                        function(returnedEnabled){
+                                if (enabled !== returnedEnabled) {
+                                          $select.prop('checked', user.isEnabled);
+                                }
+                        });
+        },
+
+
+        /**
+         * Saves the enabled value for the given user
+         * @param {String} [uid] optional user id, sets default quota if empty
+         * @param {String} enabled value
+         * @param {Function} ready callback after save
+         */
+        _updateEnabled: function(uid, enabled, ready) {
+               $.post(
+                        OC.generateUrl('/settings/users/{id}/enabled', {id: uid}),
+                        {username: uid, enabled: enabled},
+                        function (result) {
+                               	if(result.status == 'success') {
+                                        OC.Notification.showTemporary(t('admin', 'User {uid} has been {state}!',
+                                                                        {uid: uid,
+                                                                        state: result.data.enabled === 'true' ?
+                                                                        t('admin', 'enabled') :
+                                                                        t('admin', 'disabled')}
+                                                                     ));
+				} else {
+                                        OC.Notification.showTemporary(t('admin', result.data.message));
+				}
+                        }
+               );
+        },
+
 
 	/**
 	 * Creates a temporary jquery.multiselect selector on the given group field
@@ -635,6 +690,7 @@ var UserList = {
 };
 
 $(document).ready(function () {
+	OC.Plugins.attach('OC.Settings.UserList', UserList);
 	$userList = $('#userlist');
 	$userListBody = $userList.find('tbody');
 
@@ -681,11 +737,10 @@ $(document).ready(function () {
 							OC.generateUrl('/settings/users/changepassword'),
 							{username: uid, password: $(this).val(), recoveryPassword: recoveryPasswordVal},
 							function (result) {
-								if (result.status !== 'success') /*{
-									OC.Notification.show(t('admin', 'Password successfully changed.'));
-								}
-								else */{
-									OC.Notification.showTemporary(t('settings', 'Please set a password compliant with the Password Policy.'));					
+								if(result.status == 'success') {
+									OC.Notification.showTemporary(t('admin', 'Password successfully changed'));
+								} else {
+									OC.Notification.showTemporary(t('admin', result.data.message));
 								}
 							}
 						);
@@ -769,7 +824,7 @@ $(document).ready(function () {
 					$input.attr('disabled', 'disabled');
 					$.ajax({
 						type: 'PUT',
-						url: OC.generateUrl('/settings/users/{id}/mailAddress', {id: uid}),
+						url: OC.generateUrl('/settings/admin/{id}/mailAddress', {id: uid}),
 						data: {
 							mailAddress: $(this).val()
 						}
@@ -887,6 +942,21 @@ $(document).ready(function () {
 				});
 		});
 	});
+
+        if ($('#CheckboxIsEnabled').is(':checked')) {
+                $("#userlist .enabled").show();
+        }
+        // Option to display/hide the "Enabled" column
+        $('#CheckboxIsEnabled').click(function() {
+                if ($('#CheckboxIsEnabled').is(':checked')) {
+                        $("#userlist .enabled").show();
+                        OC.AppConfig.setValue('core', 'umgmt_show_is_enabled', 'true');
+                } else {
+                        $("#userlist .enabled").hide();
+                        OC.AppConfig.setValue('core', 'umgmt_show_is_enabled', 'false');
+                }
+        });
+
 
 	if ($('#CheckboxStorageLocation').is(':checked')) {
 		$("#userlist .storageLocation").show();
